@@ -1,0 +1,10 @@
+.\objects\w25q16.o: Code\src\w25q16.c
+.\objects\w25q16.o: .\Code\inc\w25q16.h
+.\objects\w25q16.o: .\CMSIS\inc\stm32f30x.h
+.\objects\w25q16.o: .\CMSIS\inc\core_cm4.h
+.\objects\w25q16.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\w25q16.o: .\CMSIS\inc\core_cmInstr.h
+.\objects\w25q16.o: .\CMSIS\inc\core_cmFunc.h
+.\objects\w25q16.o: .\CMSIS\inc\core_cmSimd.h
+.\objects\w25q16.o: .\CMSIS\inc\system_stm32f30x.h
+.\objects\w25q16.o: .\Code\inc\spi.h

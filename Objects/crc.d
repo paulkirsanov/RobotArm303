@@ -1,0 +1,9 @@
+.\objects\crc.o: Code\src\crc.c
+.\objects\crc.o: .\Code\inc\crc.h
+.\objects\crc.o: .\CMSIS\inc\stm32f30x.h
+.\objects\crc.o: .\CMSIS\inc\core_cm4.h
+.\objects\crc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\crc.o: .\CMSIS\inc\core_cmInstr.h
+.\objects\crc.o: .\CMSIS\inc\core_cmFunc.h
+.\objects\crc.o: .\CMSIS\inc\core_cmSimd.h
+.\objects\crc.o: .\CMSIS\inc\system_stm32f30x.h

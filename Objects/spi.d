@@ -1,0 +1,9 @@
+.\objects\spi.o: Code\src\spi.c
+.\objects\spi.o: .\Code\inc\spi.h
+.\objects\spi.o: .\CMSIS\inc\stm32f30x.h
+.\objects\spi.o: .\CMSIS\inc\core_cm4.h
+.\objects\spi.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\spi.o: .\CMSIS\inc\core_cmInstr.h
+.\objects\spi.o: .\CMSIS\inc\core_cmFunc.h
+.\objects\spi.o: .\CMSIS\inc\core_cmSimd.h
+.\objects\spi.o: .\CMSIS\inc\system_stm32f30x.h

@@ -1,0 +1,51 @@
+else if(Stopper == StopMotor2)
+				{
+					if(Direction == CCW)
+						N = -N;
+					
+					if(flag == true)
+					{
+						usart_send_data(USART1, 0x71);
+						break;
+					}
+					else if(((N + tmp) <= 0) && (flag == 0))
+					{
+						usart_send_data(USART1, 0x71);
+						break;
+					}
+					else
+					{
+						usart_send_data(USART1, 0x44);
+						continue;
+					}
+				}
+
+
+
+void st_vMotor2(void *pvParameters)
+{
+	tRotate Rcv;
+	uint16_t tmp = 0;
+	uint8_t tmp_l = 0, tmp_h = 0;
+
+	while(1)
+	{
+		if(xQueueReceive(qMotor2, &Rcv, portMAX_DELAY))
+		{
+			st_Rotate(Rcv.aMotor, Rcv.aDirection, Rcv.aSteps, Rcv.aSpeed, StopMotor2, Rcv.aMode, 0);
+			
+			if(Rcv.aDirection == CW)
+				Rcv.aSteps = -Rcv.aSteps;
+			xQueueReceive(qValue2, &tmp, portMAX_DELAY);
+			tmp = Rcv.aSteps + tmp;
+			xQueueSendToBack(qValue2, &tmp, portMAX_DELAY);
+			tmp_h = tmp >> 8;
+			tmp_l = tmp & 0xFF;
+			usart_send_data(USART1, 0x24);
+			usart_send_data(USART1, tmp_l);
+			usart_send_data(USART1, tmp_h);
+			
+			xSemaphoreGive(OK_Motor2);
+		}
+	}
+}
