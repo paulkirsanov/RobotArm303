@@ -148,7 +148,56 @@
           <Name>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F3xx_256 -FS08000000 -FL040000 -FP0($$Device:STM32F303VCTx$CMSIS\Flash\STM32F3xx_256.FLM))</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>335</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134224862</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\Code\src\stepmotor.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RobotArm\Code/src/stepmotor.c\335</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>367</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134225030</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\Code\src\stepmotor.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RobotArm\Code/src/stepmotor.c\367</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>399</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134225198</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\Code\src\stepmotor.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RobotArm\Code/src/stepmotor.c\399</Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -194,6 +243,31 @@
           <count>8</count>
           <WinNumber>1</WinNumber>
           <ItemText>packet_rx</ItemText>
+        </Ww>
+        <Ww>
+          <count>9</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>qValue1</ItemText>
+        </Ww>
+        <Ww>
+          <count>10</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>value,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>tmp2,0x10</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>tmp</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Stopper</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -262,8 +336,8 @@
       <pMultCmdsp></pMultCmdsp>
       <SystemViewers>
         <Entry>
-          <Name>System Viewer\USART1</Name>
-          <WinId>35902</WinId>
+          <Name>System Viewer\NVIC</Name>
+          <WinId>35905</WinId>
         </Entry>
       </SystemViewers>
       <DebugDescription>
@@ -382,7 +456,7 @@
 
   <Group>
     <GroupName>CMSIS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -414,7 +488,7 @@
 
   <Group>
     <GroupName>StartUp</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -434,7 +508,7 @@
 
   <Group>
     <GroupName>FreeRTOS</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

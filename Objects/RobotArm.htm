@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\RobotArm.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\RobotArm.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Aug 18 15:42:19 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Dec 16 14:13:09 2021
 <BR><P>
 <H3>Maximum Stack Usage =        200 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-st_vMotor1 &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
+vBootLoader &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 <P>
 <H3>
 Functions with no stack information
@@ -600,12 +600,12 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a9]"></a>IO_SetLine</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, io.o(i.IO_SetLine))
+<P><STRONG><a name="[ab]"></a>IO_SetLine</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, io.o(i.IO_SetLine))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IO_SetLine
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Step
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_resolution
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Step
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_resolution
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
 </UL>
 
 <P><STRONG><a name="[76]"></a>SendQueueValue</STRONG> (Thumb, 28 bytes, Stack size 24 bytes, stepmotor.o(i.SendQueueValue))
@@ -614,10 +614,11 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_send_data
 </UL>
-<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;servo_Rotate
 </UL>
 
-<P><STRONG><a name="[79]"></a>Stepper_Init</STRONG> (Thumb, 320 bytes, Stack size 16 bytes, stepmotor.o(i.Stepper_Init))
+<P><STRONG><a name="[79]"></a>Stepper_Init</STRONG> (Thumb, 334 bytes, Stack size 16 bytes, stepmotor.o(i.Stepper_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = Stepper_Init &rArr; xTaskCreate &rArr; prvInitialiseNewTask
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCreate
@@ -651,7 +652,7 @@ Global Symbols
 <P><STRONG><a name="[29]"></a>TIM3_IRQHandler</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, main.o(i.TIM3_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f303xc.o(RESET)
 </UL>
-<P><STRONG><a name="[31]"></a>USART1_IRQHandler</STRONG> (Thumb, 260 bytes, Stack size 8 bytes, main.o(i.USART1_IRQHandler))
+<P><STRONG><a name="[31]"></a>USART1_IRQHandler</STRONG> (Thumb, 232 bytes, Stack size 8 bytes, main.o(i.USART1_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = USART1_IRQHandler &rArr; xQueueGiveFromISR &rArr; xTaskRemoveFromEventList
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGiveFromISR
@@ -711,7 +712,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c0]"></a>pvTaskIncrementMutexHeldCount</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, tasks.o(i.pvTaskIncrementMutexHeldCount))
-<BR><BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<BR><BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[9f]"></a>pxPortInitialiseStack</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, port.o(i.pxPortInitialiseStack))
@@ -730,28 +731,33 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[ae]"></a>servo_Rotate</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, stepmotor.o(i.servo_Rotate))
-<BR><BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vGripper
+<P><STRONG><a name="[a8]"></a>servo_Rotate</STRONG> (Thumb, 148 bytes, Stack size 16 bytes, stepmotor.o(i.servo_Rotate))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = servo_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
+</UL>
+<BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendQueueValue
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+</UL>
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vGripper
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vBootLoader
 </UL>
 
-<P><STRONG><a name="[a8]"></a>set_resolution</STRONG> (Thumb, 280 bytes, Stack size 16 bytes, stepmotor.o(i.set_resolution))
+<P><STRONG><a name="[aa]"></a>set_resolution</STRONG> (Thumb, 280 bytes, Stack size 16 bytes, stepmotor.o(i.set_resolution))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = set_resolution &rArr; IO_SetLine
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IO_SetLine
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IO_SetLine
 </UL>
-<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
 </UL>
 
-<P><STRONG><a name="[aa]"></a>st_Rotate</STRONG> (Thumb, 732 bytes, Stack size 48 bytes, stepmotor.o(i.st_Rotate))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
+<P><STRONG><a name="[ac]"></a>st_Rotate</STRONG> (Thumb, 974 bytes, Stack size 40 bytes, stepmotor.o(i.st_Rotate))
+<BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Step
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_resolution
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Step
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_resolution
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendQueueValue
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IO_SetLine
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IO_SetLine
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vMotor3
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vMotor2
@@ -759,50 +765,53 @@ Global Symbols
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vBootLoader
 </UL>
 
-<P><STRONG><a name="[ac]"></a>st_Step</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, stepmotor.o(i.st_Step))
+<P><STRONG><a name="[ad]"></a>st_Step</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, stepmotor.o(i.st_Step))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = st_Step &rArr; IO_SetLine
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IO_SetLine
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IO_SetLine
 </UL>
-<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
 </UL>
 
-<P><STRONG><a name="[53]"></a>st_vGripper</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, stepmotor.o(i.st_vGripper))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = st_vGripper &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
+<P><STRONG><a name="[53]"></a>st_vGripper</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, stepmotor.o(i.st_vGripper))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = st_vGripper &rArr; servo_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;servo_Rotate
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;servo_Rotate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> stepmotor.o(i.Stepper_Init)
 </UL>
-<P><STRONG><a name="[50]"></a>st_vMotor1</STRONG> (Thumb, 130 bytes, Stack size 24 bytes, stepmotor.o(i.st_vMotor1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = st_vMotor1 &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
+<P><STRONG><a name="[50]"></a>st_vMotor1</STRONG> (Thumb, 146 bytes, Stack size 16 bytes, stepmotor.o(i.st_vMotor1))
+<BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = st_vMotor1 &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_send_data
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> stepmotor.o(i.Stepper_Init)
 </UL>
-<P><STRONG><a name="[51]"></a>st_vMotor2</STRONG> (Thumb, 130 bytes, Stack size 24 bytes, stepmotor.o(i.st_vMotor2))
-<BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = st_vMotor2 &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
+<P><STRONG><a name="[51]"></a>st_vMotor2</STRONG> (Thumb, 146 bytes, Stack size 16 bytes, stepmotor.o(i.st_vMotor2))
+<BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = st_vMotor2 &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_send_data
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> stepmotor.o(i.Stepper_Init)
 </UL>
-<P><STRONG><a name="[52]"></a>st_vMotor3</STRONG> (Thumb, 130 bytes, Stack size 24 bytes, stepmotor.o(i.st_vMotor3))
-<BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = st_vMotor3 &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
+<P><STRONG><a name="[52]"></a>st_vMotor3</STRONG> (Thumb, 146 bytes, Stack size 16 bytes, stepmotor.o(i.st_vMotor3))
+<BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = st_vMotor3 &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_send_data
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> stepmotor.o(i.Stepper_Init)
 </UL>
@@ -872,26 +881,26 @@ Global Symbols
 <P><STRONG><a name="[57]"></a>vBlinker</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, main.o(i.vBlinker))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = vBlinker &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
 <P><STRONG><a name="[56]"></a>vBlinkerBootLoader</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, main.o(i.vBlinkerBootLoader))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = vBlinkerBootLoader &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[55]"></a>vBootLoader</STRONG> (Thumb, 306 bytes, Stack size 24 bytes, main.o(i.vBootLoader))
+<P><STRONG><a name="[55]"></a>vBootLoader</STRONG> (Thumb, 366 bytes, Stack size 32 bytes, main.o(i.vBootLoader))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = vBootLoader &rArr; st_Rotate &rArr; SendQueueValue &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskSuspend
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskResume
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_send_data
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;servo_Rotate
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;servo_Rotate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
@@ -925,7 +934,7 @@ Global Symbols
 
 <P><STRONG><a name="[8e]"></a>vPortEnterCritical</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, port.o(i.vPortEnterCritical))
 <BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskSuspend
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskResume
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCheckTasksWaitingTermination
@@ -940,7 +949,7 @@ Global Symbols
 
 <P><STRONG><a name="[90]"></a>vPortExitCritical</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, port.o(i.vPortExitCritical))
 <BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskSuspend
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskResume
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCheckTasksWaitingTermination
@@ -965,8 +974,8 @@ Global Symbols
 <P><STRONG><a name="[54]"></a>vReadSemaphore</STRONG> (Thumb, 112 bytes, Stack size 0 bytes, main.o(i.vReadSemaphore))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = vReadSemaphore &rArr; xQueueGenericReceive &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_send_data
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
@@ -975,21 +984,24 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = vSender &rArr; xQueueGenericSend &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericCreate
 <LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_send_string
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;convertFrom8to16
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[ad]"></a>vTaskDelay</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, tasks.o(i.vTaskDelay))
+<P><STRONG><a name="[ae]"></a>vTaskDelay</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, tasks.o(i.vTaskDelay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvAddCurrentTaskToDelayedList
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskResumeAll
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskSuspendAll
 </UL>
-<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vMotor3
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vMotor2
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vMotor1
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vReadSemaphore
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vBootLoader
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vBlinkerBootLoader
@@ -1007,7 +1019,7 @@ Global Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsert
 </UL>
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[b9]"></a>vTaskPriorityInherit</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, tasks.o(i.vTaskPriorityInherit))
@@ -1016,7 +1028,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsertEnd
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uxListRemove
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[b6]"></a>vTaskResume</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, tasks.o(i.vTaskResume))
@@ -1033,7 +1045,7 @@ Global Symbols
 
 <P><STRONG><a name="[c1]"></a>vTaskSetTimeOutState</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, tasks.o(i.vTaskSetTimeOutState))
 <BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskCheckForTimeOut
 </UL>
 
@@ -1061,8 +1073,8 @@ Global Symbols
 
 <P><STRONG><a name="[92]"></a>vTaskSuspendAll</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, tasks.o(i.vTaskSuspendAll))
 <BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCheckTasksWaitingTermination
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvPortMalloc
 </UL>
@@ -1092,7 +1104,7 @@ Global Symbols
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vSender
 </UL>
 
-<P><STRONG><a name="[ab]"></a>xQueueGenericReceive</STRONG> (Thumb, 342 bytes, Stack size 56 bytes, queue.o(i.xQueueGenericReceive))
+<P><STRONG><a name="[a9]"></a>xQueueGenericReceive</STRONG> (Thumb, 342 bytes, Stack size 56 bytes, queue.o(i.xQueueGenericReceive))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = xQueueGenericReceive &rArr; vTaskPlaceOnEventList &rArr; prvAddCurrentTaskToDelayedList &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskRemoveFromEventList
@@ -1113,7 +1125,8 @@ Global Symbols
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vMotor2
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vMotor1
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_vGripper
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;st_Rotate
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;servo_Rotate
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vSender
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vReadSemaphore
 </UL>
@@ -1169,7 +1182,7 @@ Global Symbols
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[7a]"></a>xTaskCreate</STRONG> (Thumb, 96 bytes, Stack size 72 bytes, tasks.o(i.xTaskCreate))
@@ -1217,7 +1230,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGiveFromISR
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReset
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvUnlockQueue
 </UL>
@@ -1233,8 +1246,8 @@ Global Symbols
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCheckTasksWaitingTermination
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pvPortMalloc
 </UL>
@@ -1280,7 +1293,7 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[97]"></a>prvCopyDataToQueue</STRONG> (Thumb, 124 bytes, Stack size 24 bytes, queue.o(i.prvCopyDataToQueue))
@@ -1306,7 +1319,7 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortExitCritical
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[a2]"></a>prvIsQueueFull</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, queue.o(i.prvIsQueueFull))
@@ -1327,7 +1340,7 @@ Local Symbols
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
 <BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericReceive
 </UL>
 
 <P><STRONG><a name="[89]"></a>prvAddCurrentTaskToDelayedList</STRONG> (Thumb, 124 bytes, Stack size 24 bytes, tasks.o(i.prvAddCurrentTaskToDelayedList))
@@ -1337,7 +1350,7 @@ Local Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsert
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uxListRemove
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
+<BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskPlaceOnEventList
 </UL>
 

@@ -60,8 +60,8 @@ void timer4_pwm_init(void)
 	TIM4->CR1 &= ~TIM_CR1_DIR;
 	TIM4->CR1 &= ~TIM_CR1_CMS;
 	
-	TIM4->PSC = 21;																							//36
-	TIM4->ARR = 65450;																					//10000
+	TIM4->PSC = 21;																								//36
+	TIM4->ARR = 65450;																						//10000
 	
 	TIM4->CR1 = TIM_CR1_CEN;
 }

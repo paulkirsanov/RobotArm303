@@ -1,7 +1,7 @@
 #include "main.h"
 
 QueueHandle_t qMotor1, qMotor2, qMotor3, qGripper;
-QueueHandle_t qValue1, qValue2, qValue3;
+QueueHandle_t qValue1, qValue2, qValue3, qValue4;
 
 SemaphoreHandle_t StopMotor1 = NULL, StopMotor2 = NULL, StopMotor3 = NULL;
 SemaphoreHandle_t OK_Motor1 = NULL, OK_Motor2 = NULL, OK_Motor3 = NULL, OK_Gripper = NULL;
@@ -15,7 +15,6 @@ uint8_t packet_rx[RX_PACKET_SIZE] = {0};
 uint8_t crc_rx[RX_CRC_SIZE] = {0};
 uint32_t crc_receive = 0;
 uint32_t crc_calculation = 0;
-uint8_t index_crc = 0;
 uint16_t error_flag = 0;
 uint16_t count_packet = 0;
 
@@ -247,40 +246,57 @@ void vSender(void *pvParameters)
 
 void vBootLoader(void *pvParameters)
 {
+	tRotate Sendit1, Sendit2, Sendit3;
+	
 	NVIC_EnableIRQ(TIM2_IRQn);
-	//NVIC_DisableIRQ(TIM3_IRQn);
 	vTaskSuspend(hBlinker);
 	vTaskSuspend(hSender);
 	vTaskSuspend(hReadSemaphore);
 	
 	#if(configDEBUG_SETSTARTPOSITION)
+		
+	Sendit1.aDirection = CW;
+	Sendit1.aMode = SIXTEENTH_STEP;
+	Sendit1.aMotor = st_Motor1;
+	Sendit1.aSpeed = 1;
+	Sendit1.aSteps = STARTPOSMOTOR1;
 	
-	st_Rotate(st_Motor1, CW, 10000, 1, StopMotor1, SIXTEENTH_STEP, 1);
+	st_Rotate(Sendit1, StopMotor1, BOOT);
 	vTaskDelay(10);
 	usart_send_data(USART1, RESETDIR1);							//Reset value motor 1
 	usart_send_data(USART1, 0x00);
 	usart_send_data(USART1, 0x00);
 	
-	st_Rotate(st_Motor2, CW, 8000, 1, StopMotor2, SIXTEENTH_STEP, 1);
+	Sendit2.aDirection = CW;
+	Sendit2.aMode = SIXTEENTH_STEP;
+	Sendit2.aMotor = st_Motor2;
+	Sendit2.aSpeed = 1;
+	Sendit2.aSteps = STARTPOSMOTOR2;
+	
+	st_Rotate(Sendit2, StopMotor2, BOOT);
 	vTaskDelay(10);
 	usart_send_data(USART1, RESETDIR2);							//Reset value motor 2
 	usart_send_data(USART1, 0x00);
 	usart_send_data(USART1, 0x00);
 	
-	st_Rotate(st_Motor3, CW, 100, 1, StopMotor3, SIXTEENTH_STEP, 1);
+	Sendit3.aDirection = CW;
+	Sendit3.aMode = SIXTEENTH_STEP;
+	Sendit3.aMotor = st_Motor3;
+	Sendit3.aSpeed = 1;
+	Sendit3.aSteps = STARTPOSMOTOR3;
+	
+	st_Rotate(Sendit3, StopMotor3, BOOT);
 	vTaskDelay(10);
 	usart_send_data(USART1, RESETDIR3);						  //Reset value motor 3
 	usart_send_data(USART1, 0x00);
 	usart_send_data(USART1, 0x00);
 	
 	vTaskDelay(10);
-	servo_Rotate(0x14);															//Close
+	servo_Rotate(0x14, BOOT);												//Close
 	usart_send_data(USART1, 0x18);									//Servo close
 	
 	#endif
 	
-//	NVIC_DisableIRQ(TIM2_IRQn);
-//	NVIC_EnableIRQ(TIM3_IRQn);
 	vTaskResume(hBlinker);
 	vTaskResume(hSender);
 	vTaskResume(hReadSemaphore);
@@ -311,35 +327,32 @@ void USART1_IRQHandler(void)
 		{
 			crc_rx[rx_index - RX_PACKET_SIZE] = USART1->RDR;
 			rx_index++;
+		
+			if(rx_index == RX_BUFFER_SIZE)
+			{
+				rx_index = 0;
+				
+				crc_receive = convertFrom8to32(crc_rx);
+				crc_calculation = crc_calc((uint32_t *)packet_rx, 3);
+				
+				if(crc_calculation != crc_receive)
+				{
+					++error_flag;
+					usart_send_data(USART1, 0x0A);				// ERROR
+				}
+				else
+				{
+					++count_packet;
+					xSemaphoreGiveFromISR(ISRFromUSARTHandle, &xHigherPriorityTaskWoken);
+					usart_send_data(USART1, 0x1D);				// OK
+				}
+				
+				if(xHigherPriorityTaskWoken == pdTRUE)
+				{
+					portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+				}
+			}
 		}
-		else if(rx_index == RX_BUFFER_SIZE)
-		{
-			rx_index = 0;
-			++count_packet;
-			
-			crc_receive = convertFrom8to32(crc_rx);
-			crc_calculation = crc_calc((uint32_t *)packet_rx, 3);
-			
-			if(crc_calculation != crc_receive)
-			{
-				++error_flag;
-				usart_send_data(USART1, 0x0A);				// ERROR
-			}
-			else
-			{
-				xSemaphoreGiveFromISR(ISRFromUSARTHandle, &xHigherPriorityTaskWoken);
-				usart_send_data(USART1, 0x1D);				// OK
-			}
-			
-			if(xHigherPriorityTaskWoken == pdTRUE)
-			{
-				portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
-			}
-		}
-	}
-	else
-	{
-		NVIC_DisableIRQ(USART1_IRQn);
 	}
 }
 
@@ -411,6 +424,6 @@ void vReadSemaphore(void *pvParameters)
 		else if(xSemaphoreTake(OK_Gripper, 0))
 			usart_send_data(USART1, 0x29);
 		
-		vTaskDelay(10);
+		vTaskDelay(1);
 	}
 }
